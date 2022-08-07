@@ -57,7 +57,7 @@ window.addEventListener("load", async () => {
   );
 });
 
-addEventListener("popstate", (event) => {
+window.addEventListener("hashchange", (event) => {
   console.log(event);
 });
 
