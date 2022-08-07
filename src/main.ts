@@ -3,6 +3,8 @@ import { setupCounter } from "./counter";
 import { AuthService, DatabaseService, FireEnjin } from "@fireenjin/sdk";
 import { initializeApp } from "@firebase/app";
 
+let session = JSON.parse(localStorage?.getItem?.("chat:session") || "null");
+
 const app = initializeApp({
   apiKey: "AIzaSyBg-JMXxVXG6-eMqqzZLIXnYosnYGETHfs",
   authDomain: "madness-chat.firebaseapp.com",
@@ -15,9 +17,6 @@ const app = initializeApp({
 });
 const auth = new AuthService({
   app,
-});
-auth.onAuthChanged((session: any) => {
-  console.log(session);
 });
 const db = new DatabaseService({
   app,
@@ -33,9 +32,33 @@ const sdk = new FireEnjin({
   ],
 });
 
-window.addEventListener("load", async () => {
-  const res = await sdk.fetch("users", { id: "test" });
+auth.onAuthChanged(async (authSession: any) => {
+  localStorage.setItem("chat:session", JSON.stringify(authSession));
+  console.log(authSession);
+  session = authSession;
+  const res = await sdk.fetch("users", { id: authSession?.uid });
   console.log(res);
+  if (session?.uid?.length)
+    document
+      .querySelectorAll('[data-trigger="login"]')
+      .forEach((el) => el.remove());
 });
 
-setupCounter(document.querySelector<HTMLButtonElement>("#counter")!);
+window.addEventListener("load", async () => {
+  document.querySelectorAll("[data-trigger]").forEach((el) =>
+    el.addEventListener("click", (event) => {
+      const triggerEl = event?.target as HTMLElement;
+      const trigger = triggerEl?.dataset?.trigger;
+      if (trigger === "login") {
+        const loginType = triggerEl?.dataset?.type as string;
+        auth.withSocial(loginType);
+      }
+    })
+  );
+});
+
+addEventListener("popstate", (event) => {
+  console.log(event);
+});
+
+setupCounter(db, document.querySelector<HTMLButtonElement>("#counter")!);
