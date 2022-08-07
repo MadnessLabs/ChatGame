@@ -16,6 +16,9 @@ const app = initializeApp({
 const auth = new AuthService({
   app,
 });
+auth.onAuthChanged((session: any) => {
+  console.log(session);
+});
 const db = new DatabaseService({
   app,
 });
