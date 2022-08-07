@@ -33,7 +33,9 @@ const sdk = new FireEnjin({
   ],
 });
 
-const res = await sdk.fetch("users", { id: "test" });
-console.log(res);
+window.addEventListener("load", async () => {
+  const res = await sdk.fetch("users", { id: "test" });
+  console.log(res);
+});
 
 setupCounter(document.querySelector<HTMLButtonElement>("#counter")!);
