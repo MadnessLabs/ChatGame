@@ -1,4 +1,5 @@
 import "./style.css";
+import PageHome from "./pages/home";
 import { setupCounter } from "./counter";
 import { AuthService, DatabaseService, FireEnjin } from "@fireenjin/sdk";
 import { initializeApp } from "@firebase/app";
@@ -62,3 +63,5 @@ window.addEventListener("hashchange", (event) => {
 });
 
 setupCounter(db, document.querySelector<HTMLButtonElement>("#counter")!);
+
+window.customElements.define("home-page", PageHome);
