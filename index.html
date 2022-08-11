@@ -17,6 +17,7 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css"
     />
+    <script type="module" src="/src/main.ts"></script>
   </head>
   <body>
     <ion-app>
@@ -26,17 +27,18 @@
         </ion-toolbar>
       </ion-header>
       <ion-content role="main">
-        <ion-button data-trigger="login" data-type="google"
-          >Login with Google</ion-button
+        <page-home>
+          <ion-button data-trigger="login" data-type="google"
+            >Login with Google</ion-button
+          >
+          <div class="card">
+            <h1>Counter</h1>
+            <ion-button id="counter" type="button"></ion-button>
+          </div>
+          <ion-button href="#start">Start</ion-button>
+          asdf</page-home
         >
-        <div class="card">
-          <h1>Counter</h1>
-          <ion-button id="counter" type="button"></ion-button>
-        </div>
-        <ion-button href="#start">Start</ion-button>
-        <home-page></home-page>
       </ion-content>
     </ion-app>
-    <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

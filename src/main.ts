@@ -64,4 +64,10 @@ window.addEventListener("hashchange", (event) => {
 
 setupCounter(db, document.querySelector<HTMLButtonElement>("#counter")!);
 
-window.customElements.define("home-page", PageHome);
+declare global {
+  interface HTMLElementTagNameMap {
+    "page-home": PageHome;
+  }
+}
+
+window.customElements.define("page-home", PageHome);
