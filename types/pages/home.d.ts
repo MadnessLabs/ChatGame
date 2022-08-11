@@ -1,4 +1,4 @@
-import { LitElement } from "lit";
+import { LitElement } from "lit-element";
 /**
  * An example element.
  *
@@ -16,5 +16,5 @@ export default class PageHome extends LitElement {
     count: number;
     render(): import("lit-html").TemplateResult<1>;
     private _onClick;
-    static styles: import("lit").CSSResult;
+    static styles: import("lit-element").CSSResult;
 }
