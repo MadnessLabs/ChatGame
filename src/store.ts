@@ -1,11 +1,7 @@
-import { createStore } from "@stencil/store";
+import { LitState, stateVar } from "lit-element-state";
 
-const { state, onChange } = createStore({
-  session: JSON.parse(localStorage?.getItem?.("chat:session") || "null"),
-});
+class MyState extends LitState {
+  @stateVar() counter = 0;
+}
 
-onChange("session", async (value) => {
-  localStorage.setItem("chat:session", JSON.stringify(value));
-});
-
-export default state;
+export const myState = new MyState();
