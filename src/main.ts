@@ -6,7 +6,6 @@ import PageLogin from "./pages/login";
 import PageHome from "./pages/home";
 import PageNew from "./pages/new";
 import PagePlay from "./pages/play";
-import state from "./store";
 
 const app = initializeApp({
   apiKey: "AIzaSyBg-JMXxVXG6-eMqqzZLIXnYosnYGETHfs",
@@ -35,16 +34,15 @@ const sdk = new FireEnjin({
   ],
 });
 
-auth.onAuthChanged(async (authSession: any) => {
-  localStorage.setItem("chat:session", JSON.stringify(authSession));
-  console.log(authSession);
-  state.session = authSession;
-  const res = await sdk.fetch("users", { id: authSession?.uid });
+auth.onAuthChanged(async (session: any) => {
+  // state.session = session;
+  const res = await sdk.fetch("users", { id: session?.uid });
   console.log(res);
 });
 
-document.addEventListener("click", (event) => {
-  const clickedEl = event?.target as HTMLElement;
+document.addEventListener("fireenjinTrigger", (event: any) => {
+  console.log(event);
+  const clickedEl = event?.detail?.event?.target as HTMLElement;
   const trigger = clickedEl?.dataset?.trigger;
   if (trigger === "login") {
     const loginType = clickedEl?.dataset?.type as string;

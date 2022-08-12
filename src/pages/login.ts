@@ -23,7 +23,17 @@ export default class PageLogin extends LitElement {
 
   private _renderLoginButton() {
     return !state?.session?.uid
-      ? html`<ion-button data-trigger="login" data-type="google">
+      ? html`<ion-button
+          @click=${(event: PointerEvent) =>
+            this.dispatchEvent(
+              new CustomEvent("fireenjinTrigger", {
+                detail: { event },
+                bubbles: true,
+              })
+            )}
+          data-trigger="login"
+          data-type="google"
+        >
           Login with Google
         </ion-button>`
       : null;
