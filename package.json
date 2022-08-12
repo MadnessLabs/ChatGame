@@ -24,6 +24,7 @@
     },
     "dependencies": {
         "@fireenjin/sdk": "^1.2.61",
+        "@vaadin/router": "^1.7.4",
         "firebase": "^9.9.2",
         "lit-element": "^3.2.2"
     }

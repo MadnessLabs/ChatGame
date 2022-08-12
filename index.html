@@ -17,20 +17,24 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css"
     />
-    <script type="module" src="/src/main.ts"></script>
+    <script type="module" src="/src/pages/new.ts"></script>
+    <script type="module" src="/src/pages/play.ts"></script>
+    <script type="nomodule" src="/src/router.ts"></script>
   </head>
   <body>
+    <div id="outlet"></div>
     <ion-app>
-      <ion-header>
+      <!-- <ion-header>
         <ion-toolbar>
           <ion-title>Madness.Chat</ion-title>
         </ion-toolbar>
-      </ion-header>
-      <ion-content role="main">
+      </ion-header> -->
+      <!-- <ion-content role="main">
         <page-home>
           <ion-button data-trigger="login" data-type="google"
             >Login with Google</ion-button
           >
+          <div></div>
           <div class="card">
             <h1>Counter</h1>
             <ion-button id="counter" type="button"></ion-button>
@@ -38,7 +42,12 @@
           <ion-button href="#start">Start</ion-button>
           asdf</page-home
         >
-      </ion-content>
+        <page-play name="Big ol Dick"></page-play>
+        <page-play name="Big Black Dick"></page-play>
+        <page-play name="Not a Dick"></page-play>
+        <page-new></page-new>
+        <page-new name="HAHAHA"></page-new>
+      </ion-content> -->
     </ion-app>
   </body>
 </html>
