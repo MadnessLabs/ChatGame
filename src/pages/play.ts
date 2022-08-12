@@ -1,4 +1,5 @@
-import { LitElement, html, customElement, property, css } from "lit-element";
+import { LitElement, html, css } from "lit";
+import { customElement, property } from "lit/decorators.js";
 
 @customElement("page-play")
 export default class PagePlay extends LitElement {

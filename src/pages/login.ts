@@ -1,4 +1,5 @@
-import { LitElement, css, customElement, html, property } from "lit-element";
+import { LitElement, html, css } from "lit";
+import { customElement, property } from "lit/decorators.js";
 import state from "../store";
 
 /**
