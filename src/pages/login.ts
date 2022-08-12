@@ -1,4 +1,5 @@
 import { LitElement, css, customElement, html, property } from "lit-element";
+import state from "../store";
 
 /**
  * An example element.
@@ -20,12 +21,17 @@ export default class PageLogin extends LitElement {
   @property({ type: Number })
   count = 0;
 
+  private _renderLoginButton() {
+    return !state?.session?.uid
+      ? html`<ion-button data-trigger="login" data-type="google">
+          Login with Google
+        </ion-button>`
+      : null;
+  }
+
   render() {
     return html`
-      <ion-button data-trigger="login" data-type="google"
-        >Login with Google</ion-button
-      >
-      <div></div>
+      ${this._renderLoginButton()}
       <div class="card">
         <h1>Counter</h1>
         <ion-button id="counter" type="button"></ion-button>

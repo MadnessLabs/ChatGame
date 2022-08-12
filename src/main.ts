@@ -6,8 +6,7 @@ import PageLogin from "./pages/login";
 import PageHome from "./pages/home";
 import PageNew from "./pages/new";
 import PagePlay from "./pages/play";
-
-let session = JSON.parse(localStorage?.getItem?.("chat:session") || "null");
+import state from "./store";
 
 const app = initializeApp({
   apiKey: "AIzaSyBg-JMXxVXG6-eMqqzZLIXnYosnYGETHfs",
@@ -39,9 +38,18 @@ const sdk = new FireEnjin({
 auth.onAuthChanged(async (authSession: any) => {
   localStorage.setItem("chat:session", JSON.stringify(authSession));
   console.log(authSession);
-  session = authSession;
+  state.session = authSession;
   const res = await sdk.fetch("users", { id: authSession?.uid });
   console.log(res);
+});
+
+document.addEventListener("click", (event) => {
+  const clickedEl = event?.target as HTMLElement;
+  const trigger = clickedEl?.dataset?.trigger;
+  if (trigger === "login") {
+    const loginType = clickedEl?.dataset?.type as string;
+    auth.withSocial(loginType);
+  }
 });
 
 declare global {
@@ -61,20 +69,6 @@ router.setRoutes([
     component: "page-login",
     action: async () => {
       await import("./pages/login");
-      if (session?.uid?.length)
-        document
-          .querySelectorAll('[data-trigger="login"]')
-          .forEach((el) => el.remove());
-      document.querySelectorAll("[data-trigger]").forEach((el) =>
-        el.addEventListener("click", (event) => {
-          const triggerEl = event?.target as HTMLElement;
-          const trigger = triggerEl?.dataset?.trigger;
-          if (trigger === "login") {
-            const loginType = triggerEl?.dataset?.type as string;
-            auth.withSocial(loginType);
-          }
-        })
-      );
     },
   },
   {
