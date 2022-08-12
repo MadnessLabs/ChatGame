@@ -1,8 +1,9 @@
 import "./style.css";
 import PageHome from "./pages/home";
-import { setupCounter } from "./counter";
 import { AuthService, DatabaseService, FireEnjin } from "@fireenjin/sdk";
 import { initializeApp } from "@firebase/app";
+import AppRouter from "./router";
+import PageLogin from "./pages/login";
 
 let session = JSON.parse(localStorage?.getItem?.("chat:session") || "null");
 
@@ -45,7 +46,21 @@ auth.onAuthChanged(async (authSession: any) => {
       .forEach((el) => el.remove());
 });
 
+declare global {
+  interface HTMLElementTagNameMap {
+    "app-router": AppRouter;
+    "page-login": PageLogin;
+    "page-home": PageHome;
+  }
+}
+window.customElements.define("page-login", PageLogin);
+window.customElements.define("page-home", PageHome);
+window.customElements.define("app-router", AppRouter);
+
 window.addEventListener("load", async () => {
+  const routerEl = document.createElement("app-router");
+  document.body.appendChild(routerEl);
+  console.dir(routerEl.querySelector("ion-router"));
   document.querySelectorAll("[data-trigger]").forEach((el) =>
     el.addEventListener("click", (event) => {
       const triggerEl = event?.target as HTMLElement;
@@ -57,17 +72,3 @@ window.addEventListener("load", async () => {
     })
   );
 });
-
-window.addEventListener("hashchange", (event) => {
-  console.log(event);
-});
-
-setupCounter(db, document.querySelector<HTMLButtonElement>("#counter")!);
-
-declare global {
-  interface HTMLElementTagNameMap {
-    "page-home": PageHome;
-  }
-}
-
-window.customElements.define("page-home", PageHome);
