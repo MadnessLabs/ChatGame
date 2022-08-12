@@ -4,6 +4,13 @@ export const router = new Router(outlet);
 
 router.setRoutes([
   {
+    path: "/",
+    component: "page-home",
+    action: async () => {
+      await import("./pages/home");
+    },
+  },
+  {
     path: "/new",
     component: "page-new",
     action: async () => {
