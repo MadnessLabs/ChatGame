@@ -27,15 +27,13 @@ export default class PageLogin extends observeState(LitElement) {
   private _renderLoginButton() {
     return !appState?.session?.uid
       ? html`<ion-button
-          @click=${(event: PointerEvent) => {
-            const el = event.target as HTMLElement;
-            el.dispatchEvent(
+          @click=${(event: PointerEvent) =>
+            this.dispatchEvent(
               new CustomEvent("fireenjinTrigger", {
                 detail: { event },
                 bubbles: true,
               })
-            );
-          }}
+            )}
           data-trigger="login"
           data-type="google"
         >
