@@ -1,9 +1,7 @@
 import { LitElement, html, customElement, property, css } from "lit-element";
-import { router } from "../router";
 
 @customElement("page-play")
 export default class PagePlay extends LitElement {
-  @property({ type: Object }) location = router.location;
   @property()
   name = "Mr. X";
 

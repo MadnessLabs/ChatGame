@@ -1,7 +1,7 @@
 import { LitElement, html, css, property, customElement } from "lit-element";
 
 @customElement("page-new")
-export class PageNew extends LitElement {
+export default class PageNew extends LitElement {
   @property({ type: String })
   name = "CJ";
 

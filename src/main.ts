@@ -1,8 +1,11 @@
 import "./style.css";
-import PageHome from "./pages/home";
-import { setupCounter } from "./counter";
+import { Router } from "@vaadin/router";
 import { AuthService, DatabaseService, FireEnjin } from "@fireenjin/sdk";
 import { initializeApp } from "@firebase/app";
+import PageLogin from "./pages/login";
+import PageHome from "./pages/home";
+import PageNew from "./pages/new";
+import PagePlay from "./pages/play";
 
 let session = JSON.parse(localStorage?.getItem?.("chat:session") || "null");
 
@@ -39,35 +42,60 @@ auth.onAuthChanged(async (authSession: any) => {
   session = authSession;
   const res = await sdk.fetch("users", { id: authSession?.uid });
   console.log(res);
-  if (session?.uid?.length)
-    document
-      .querySelectorAll('[data-trigger="login"]')
-      .forEach((el) => el.remove());
 });
-
-window.addEventListener("load", async () => {
-  document.querySelectorAll("[data-trigger]").forEach((el) =>
-    el.addEventListener("click", (event) => {
-      const triggerEl = event?.target as HTMLElement;
-      const trigger = triggerEl?.dataset?.trigger;
-      if (trigger === "login") {
-        const loginType = triggerEl?.dataset?.type as string;
-        auth.withSocial(loginType);
-      }
-    })
-  );
-});
-
-window.addEventListener("hashchange", (event) => {
-  console.log(event);
-});
-
-setupCounter(db, document.querySelector<HTMLButtonElement>("#counter")!);
 
 declare global {
   interface HTMLElementTagNameMap {
     "page-home": PageHome;
+    "page-login": PageLogin;
+    "page-new": PageNew;
+    "page-play": PagePlay;
   }
 }
+const outletEl = document.querySelector('[role="main"]');
+export const router = new Router(outletEl);
 
-window.customElements.define("page-home", PageHome);
+router.setRoutes([
+  {
+    path: "/",
+    component: "page-login",
+    action: async () => {
+      await import("./pages/login");
+      if (session?.uid?.length)
+        document
+          .querySelectorAll('[data-trigger="login"]')
+          .forEach((el) => el.remove());
+      document.querySelectorAll("[data-trigger]").forEach((el) =>
+        el.addEventListener("click", (event) => {
+          const triggerEl = event?.target as HTMLElement;
+          const trigger = triggerEl?.dataset?.trigger;
+          if (trigger === "login") {
+            const loginType = triggerEl?.dataset?.type as string;
+            auth.withSocial(loginType);
+          }
+        })
+      );
+    },
+  },
+  {
+    path: "/home",
+    component: "page-home",
+    action: async () => {
+      await import("./pages/home");
+    },
+  },
+  {
+    path: "/new",
+    component: "page-new",
+    action: async () => {
+      await import("./pages/new");
+    },
+  },
+  {
+    path: "/play",
+    component: "page-play",
+    action: async () => {
+      await import("./pages/play");
+    },
+  },
+]);
