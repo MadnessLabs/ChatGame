@@ -1,4 +1,4 @@
-import { LitElement, css, html, property } from "lit-element";
+import { LitElement, customElement, css, html, property } from "lit-element";
 
 /**
  * An example element.
@@ -6,6 +6,7 @@ import { LitElement, css, html, property } from "lit-element";
  * @slot - This element has a slot
  * @csspart button - The button
  */
+@customElement("page-home")
 export default class PageHome extends LitElement {
   /**
    * Copy for the read the docs hint.
