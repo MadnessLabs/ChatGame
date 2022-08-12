@@ -1,6 +1,7 @@
 import { LitElement, html, css } from "lit";
 import { customElement, property } from "lit/decorators.js";
-import state from "../store";
+import { observeState } from "lit-element-state";
+import { appState } from "../store";
 
 /**
  * An example element.
@@ -8,8 +9,9 @@ import state from "../store";
  * @slot - This element has a slot
  * @csspart button - The button
  */
+// @ts-ignore
 @customElement("page-login")
-export default class PageLogin extends LitElement {
+export default class PageLogin extends observeState(LitElement) {
   /**
    * Copy for the read the docs hint.
    */
@@ -23,15 +25,17 @@ export default class PageLogin extends LitElement {
   count = 0;
 
   private _renderLoginButton() {
-    return !state?.session?.uid
+    return !appState?.session?.uid
       ? html`<ion-button
-          @click=${(event: PointerEvent) =>
-            this.dispatchEvent(
+          @click=${(event: PointerEvent) => {
+            const el = event.target as HTMLElement;
+            el.dispatchEvent(
               new CustomEvent("fireenjinTrigger", {
                 detail: { event },
                 bubbles: true,
               })
-            )}
+            );
+          }}
           data-trigger="login"
           data-type="google"
         >

@@ -6,6 +6,7 @@ import PageLogin from "./pages/login";
 import PageHome from "./pages/home";
 import PageNew from "./pages/new";
 import PagePlay from "./pages/play";
+import { appState } from "./store";
 
 const app = initializeApp({
   apiKey: "AIzaSyBg-JMXxVXG6-eMqqzZLIXnYosnYGETHfs",
@@ -35,7 +36,7 @@ const sdk = new FireEnjin({
 });
 
 auth.onAuthChanged(async (session: any) => {
-  // state.session = session;
+  appState.session = session;
   const res = await sdk.fetch("users", { id: session?.uid });
   console.log(res);
 });

@@ -1,7 +1,11 @@
-import { LitState, stateVar } from "lit-element-state";
+import { LitState } from "lit-element-state";
 
-class MyState extends LitState {
-  @stateVar() counter = 0;
+class AppState extends LitState {
+  static get stateVars() {
+    return {
+      session: JSON.parse(localStorage?.getItem?.("chat:session") || "null"),
+    };
+  }
 }
 
-export const myState = new MyState();
+export const appState = new AppState() as LitState & { session?: any };
