@@ -20,8 +20,23 @@ export class Accordion extends LitElement {
 
   render() {
     return html`<div>
-      <div class="header-wrapper" @click=${this.toggle}>Toggle</div>
-      ${this.expanded ? html`<div class="content-wrapper">Testing</div>` : null}
+      <div
+        class="header-wrapper"
+        @click=${this.toggle}
+        style="cursor: pointer;"
+      >
+        Toggle
+      </div>
+      <div
+        class="content-wrapper"
+        style=${`background: #ccc; transition: all ease 0.3s; ${
+          this.expanded
+            ? "opacity: 1; height: 100px;"
+            : "opacity: 0; height: 0px;"
+        }`}
+      >
+        Testing
+      </div>
     </div>`;
   }
 }
