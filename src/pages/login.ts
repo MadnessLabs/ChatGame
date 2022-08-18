@@ -46,6 +46,9 @@ export default class PageLogin extends observeState(LitElement) {
     return html`
       ${this._renderLoginButton()}
       <div class="card">
+        <fireenjin-form>
+          <input name="name" value="Popcorn245" />
+        </fireenjin-form>
         <h1>Counter</h1>
         <ion-button id="counter" type="button"></ion-button>
       </div>

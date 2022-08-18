@@ -6,6 +6,7 @@ import PageLogin from "./pages/login";
 import PageHome from "./pages/home";
 import PageNew from "./pages/new";
 import PagePlay from "./pages/play";
+import FireEnjinForm from "./components/form";
 import { appState } from "./store";
 
 const app = initializeApp({
@@ -57,8 +58,12 @@ declare global {
     "page-login": PageLogin;
     "page-new": PageNew;
     "page-play": PagePlay;
+    "fireenjin-form": FireEnjinForm;
   }
 }
+
+import("./components/form");
+
 const outletEl = document.querySelector('[role="main"]');
 export const router = new Router(outletEl);
 
