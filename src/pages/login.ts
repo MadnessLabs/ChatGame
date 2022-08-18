@@ -1,5 +1,5 @@
 import { LitElement, html, css } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { customElement, property, query } from "lit/decorators.js";
 import { observeState } from "lit-element-state";
 import { appState } from "../store";
 
@@ -24,6 +24,14 @@ export default class PageLogin extends observeState(LitElement) {
   @property({ type: Number })
   count = 0;
 
+  // @ts-ignore
+  // @query("fireenjin-accordion")
+  // accordionEl: any;
+
+  // firstUpdated() {
+  //   this.accordionEl.expanded = false;
+  // }
+
   private _renderLoginButton() {
     return !appState?.session?.uid
       ? html`<ion-button
@@ -46,7 +54,7 @@ export default class PageLogin extends observeState(LitElement) {
     return html`
       ${this._renderLoginButton()}
       <div class="card">
-        <fireenjin-accordion> </fireenjin-accordion>
+        <fireenjin-accordion></fireenjin-accordion>
         <fireenjin-form>
           <input name="name" value="Popcorn245" />
         </fireenjin-form>
