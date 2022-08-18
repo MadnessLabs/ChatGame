@@ -46,6 +46,7 @@ export default class PageLogin extends observeState(LitElement) {
     return html`
       ${this._renderLoginButton()}
       <div class="card">
+        <fireenjin-accordion> </fireenjin-accordion>
         <fireenjin-form>
           <input name="name" value="Popcorn245" />
         </fireenjin-form>

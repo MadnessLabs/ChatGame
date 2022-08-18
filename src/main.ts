@@ -63,6 +63,7 @@ declare global {
 }
 
 import("./components/form");
+import("./components/accordion");
 
 const outletEl = document.querySelector('[role="main"]');
 export const router = new Router(outletEl);
