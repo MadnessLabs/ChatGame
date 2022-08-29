@@ -4,7 +4,7 @@ import { customElement, property } from "lit/decorators.js";
 @customElement("fireenjin-accordion")
 export class Accordion extends LitElement {
   @property()
-  expanded = false;
+  expanded: boolean = false;
 
   toggle() {
     this.expanded = !this.expanded;

@@ -24,6 +24,14 @@ export default class PageLogin extends observeState(LitElement) {
   @property({ type: Number })
   count = 0;
 
+  // @ts-ignore
+  // @query("fireenjin-accordion")
+  // accordionEl: any;
+
+  // firstUpdated() {
+  //   this.accordionEl.expanded = false;
+  // }
+
   private _renderLoginButton() {
     return !appState?.session?.uid
       ? html`<ion-button
