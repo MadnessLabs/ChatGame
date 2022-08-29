@@ -10,8 +10,6 @@ export class Popover extends LitElement {
   @property()
   position!: "left" | "right" | "center";
 
-  x = {} as any;
-
   toggle(event: any) {
     this.open = !this.open;
     console.log(event);
