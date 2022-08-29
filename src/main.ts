@@ -64,6 +64,7 @@ declare global {
 
 import("./components/form");
 import("./components/accordion");
+import("./components/popover");
 
 const outletEl = document.querySelector('[role="main"]');
 export const router = new Router(outletEl);

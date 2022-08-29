@@ -46,6 +46,9 @@ export default class PageLogin extends observeState(LitElement) {
     return html`
       ${this._renderLoginButton()}
       <div class="card">
+        <fireenjin-popover label="My Popover label"
+          >My popover test</fireenjin-popover
+        >
         <fireenjin-accordion> </fireenjin-accordion>
         <fireenjin-form>
           <input name="name" value="Popcorn245" />
@@ -64,7 +67,9 @@ export default class PageLogin extends observeState(LitElement) {
       padding: 2rem;
       text-align: center;
     }
-
+    fireenjin-popover {
+      padding-bottom: 30px;
+    }
     .logo {
       height: 6em;
       padding: 1.5em;
