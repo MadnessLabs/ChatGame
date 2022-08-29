@@ -8,14 +8,14 @@ export class Popover extends LitElement {
   @property()
   label: any;
   @property()
-  position!: "left" | "right" | "center";
+  position?: "left" | "right" | "center";
 
   toggle(event: any) {
     this.open = !this.open;
     console.log(event);
-    let popEl = this.shadowRoot.getElementById("pop-id");
+    let popEl = this.shadowRoot.querySelector("#pop-id") as HTMLDivElement;
     console.log(popEl.style, event.clientX);
-    popEl.style.backgroundColor = "blue";
+    popEl.style.left = event?.clientX;
   }
   static styles = [
     css`
@@ -35,7 +35,7 @@ export class Popover extends LitElement {
         <div
           id="pop-id"
           class="popover-div"
-          style=${`background: #ccc; ${
+          style=${`background: #ccc; left:auto; ${
             this.open ? "position: absolute;" : "opacity: 0; height: 0px;"
           }`}
         >
