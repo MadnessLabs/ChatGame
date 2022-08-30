@@ -20,14 +20,23 @@ export class Popover extends LitElement {
       :host {
         display: block;
       }
+      .container {
+        background: inherit;
+        color: inherit;
+        border: none;
+        font-size: 1rem;
+      }
+      .container:hover {
+        cursor: pointer;
+      }
     `,
   ];
   render() {
     return html`
-      <div
+      <button
         class="container"
         @click=${this.toggle}
-        style="cursor:pointer; text-align:${this.position}"
+        style="text-align:${this.position}"
       >
         <slot></slot>
         <div
@@ -39,7 +48,7 @@ export class Popover extends LitElement {
         >
           <slot name="popover-content"></slot>
         </div>
-      </div>
+      </button>
     `;
   }
 }
